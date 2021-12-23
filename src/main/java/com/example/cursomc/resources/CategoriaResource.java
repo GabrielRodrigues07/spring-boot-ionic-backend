@@ -1,9 +1,10 @@
 package com.example.cursomc.resources;
 
 import com.example.cursomc.domain.Categoria;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.cursomc.services.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,16 +14,19 @@ import java.util.List;
 @RequestMapping(path ="/categorias")
 public class CategoriaResource implements Serializable {
 
-    @RequestMapping(method=RequestMethod.GET)
-    public List<Categoria> listar() {
-        Categoria cat1 = new Categoria(1L, "Informática");
-        Categoria cat2 = new Categoria(2L, "Escritório");
+    @Autowired
+    private CategoriaService service;
 
-        List<Categoria> lista = new ArrayList<>();
-        lista.add(cat1);
-        lista.add(cat2);
-
-        return lista;
+    @RequestMapping(value = "/{id}", method=RequestMethod.GET)
+    public ResponseEntity<Categoria> find(@PathVariable Long id) {
+        Categoria obj = service.buscar(id);
+        return ResponseEntity.ok().body(obj);
     }
+
+//    @GetMapping(path = "/{id}")
+//    public ResponseEntity findByid(@PathVariable Long id) {
+//        Categoria obj = service.findById(id);
+//        return ResponseEntity.ok().body(obj);
+//    }
 
 }
