@@ -20,7 +20,7 @@ public class ClienteResource implements Serializable {
 
     @RequestMapping(value = "/{id}", method=RequestMethod.GET)
     public ResponseEntity<Cliente> find(@PathVariable Long id) {
-        Cliente obj = service.buscar(id);
+        Cliente obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 

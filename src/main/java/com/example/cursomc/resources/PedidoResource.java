@@ -1,8 +1,6 @@
 package com.example.cursomc.resources;
 
-import com.example.cursomc.domain.Cliente;
 import com.example.cursomc.domain.Pedido;
-import com.example.cursomc.services.ClienteService;
 import com.example.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,7 @@ public class PedidoResource implements Serializable {
 
     @RequestMapping(value = "/{id}", method=RequestMethod.GET)
     public ResponseEntity<Pedido> find(@PathVariable Long id) {
-        Pedido obj = service.buscar(id);
+        Pedido obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
