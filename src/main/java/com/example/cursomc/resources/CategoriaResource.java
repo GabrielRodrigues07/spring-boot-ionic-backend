@@ -1,6 +1,7 @@
 package com.example.cursomc.resources;
 
 import com.example.cursomc.domain.Categoria;
+import com.example.cursomc.dto.CategoriaDTO;
 import com.example.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path ="/categorias")
@@ -20,10 +22,10 @@ public class CategoriaResource implements Serializable {
     private CategoriaService service;
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> findAll() {
-        List list = new ArrayList();
-        list.add(service.findAll());
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> list = service.findAll();
+        List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
     @RequestMapping(value = "/{id}", method=RequestMethod.GET)
