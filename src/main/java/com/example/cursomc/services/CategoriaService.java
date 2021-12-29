@@ -20,6 +20,11 @@ public class CategoriaService {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
+    public Categoria insert(Categoria obj) {
+        obj.setId(null);
+        return repository.save(obj);
+    }
+
 //    public Categoria findById(Long id) {
 //        Categoria cat = new Categoria(1L, "Teste 1");
 //        Categoria cat2 = new Categoria(2L, "Teste 2");
