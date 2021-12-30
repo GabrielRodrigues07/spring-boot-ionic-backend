@@ -22,13 +22,6 @@ public class CategoriaResource implements Serializable {
     @Autowired
     private CategoriaService service;
 
-    @GetMapping
-    public ResponseEntity<List<CategoriaDTO>> findAll() {
-        List<Categoria> list = service.findAll();
-        List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
-    }
-
     @RequestMapping(value = "/{id}", method=RequestMethod.GET)
     public ResponseEntity<Categoria> find(@PathVariable Long id) {
         Categoria obj = service.find(id);
@@ -45,6 +38,13 @@ public class CategoriaResource implements Serializable {
                 .buildAndExpand(obj.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> list = service.findAll();
+        List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
