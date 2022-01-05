@@ -1,11 +1,13 @@
 package com.example.cursomc.dto;
 
 import com.example.cursomc.domain.Cliente;
+import com.example.cursomc.services.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+@ClienteUpdate
 public class ClienteDTO {
 
     private Long id;
