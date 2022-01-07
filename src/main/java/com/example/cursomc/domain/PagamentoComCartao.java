@@ -1,11 +1,13 @@
 package com.example.cursomc.domain;
 
 import com.example.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento implements Serializable {
 
     private Integer numeroDeParcelas;
